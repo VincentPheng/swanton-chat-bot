@@ -1,6 +1,5 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React from "react";
 import { css, jsx } from "@emotion/core";
 
 export default function MessageBubble({ text, alignLeft }) {
