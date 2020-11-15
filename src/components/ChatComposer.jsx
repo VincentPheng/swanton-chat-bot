@@ -26,10 +26,11 @@ export default function ChatComposer({ onSend }) {
     height: 100%;
     font-size: 15px;
     padding: 10px 20px;
-    background-color: whitesmoke;
+    background-color: #ebebeb;
     border-radius: 30px;
     max-height: 100px;
     overflow-y: scroll;
+    border: 1px solid rgba(34,34,34,0.2);
   `;
 
   const sendButtonStyle = (theme) => css`
