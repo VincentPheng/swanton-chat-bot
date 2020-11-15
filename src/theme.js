@@ -1,4 +1,4 @@
-export default {
+const theme = {
   color: {
     primary: "#fff",
     accent: "#36863A",
@@ -11,3 +11,5 @@ export default {
     message: "0px 10px 15px 0px rgba(19, 63, 46, 0.05)",
   },
 };
+
+export default theme;
