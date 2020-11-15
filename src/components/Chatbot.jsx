@@ -5,7 +5,7 @@ import { css, jsx } from "@emotion/core";
 import ChatComposer from "./ChatComposer";
 import ChatWindow from "./ChatWindow";
 import HeaderNav from "./HeaderNav";
-import axios from "axios"
+import axios from "axios";
 
 export default function Chatbot(props) {
   const SENDER_USER = "user";
@@ -34,12 +34,12 @@ export default function Chatbot(props) {
     async function postMessage() {
       let response;
       try {
-        response =  await axios.post("webhooks/rest/webhook", requestData)
-      } catch(err) {
-        console.error(err)
+        response = await axios.post("webhooks/rest/webhook", requestData);
+      } catch (err) {
+        console.error(err);
         return;
       }
-      debugger
+      debugger;
       let botMessage = response[0].text;
       setConversation([
         ...conversation,
@@ -49,8 +49,7 @@ export default function Chatbot(props) {
     }
 
     postMessage();
-    
-  }, [query]);
+  }, [query, conversation]);
 
   /**
    * Adds the user's message to the conversation, passes message to the bot
@@ -70,7 +69,7 @@ export default function Chatbot(props) {
     grid-template-areas: "header" "chat-window" "composer";
     width: 100%;
     max-width: 700px;
-    margin:auto;
+    margin: auto;
     height: 100%;
   `;
 
