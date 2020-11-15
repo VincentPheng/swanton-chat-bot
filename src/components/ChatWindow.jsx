@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { css, jsx } from "@emotion/core";
 import MessageBubble from "./MessageBubble";
 import SuggestedOptions from "./SuggestedOptions";
+import GreetingCard from "./GreetingCard"
 
 export default function ChatWindow({
   conversation,
@@ -12,11 +13,14 @@ export default function ChatWindow({
   onSuggestionClick,
 }) {
   const windowStyles = css`
+    display:flex;
+    flex-direction: column;
     padding: 20px;
     width: 100%;
     height: 100%;
-    grid-area: "chat-window";
+    grid-area: chat-window;
     overflow-y: scroll;
+    background: whitesmoke;
   `;
 
   const chatWindowRef = useRef(null);
@@ -34,13 +38,13 @@ export default function ChatWindow({
   /**
    * Create message bubbles from the current conversation
    */
-  const conversationElements = conversation.map((m) => (
+  const conversationElements = conversation.length ? conversation.map((m) => (
     <MessageBubble
       key={m.timestamp}
       text={m.text}
       alignLeft={m.sender !== "user"}
     />
-  ));
+  )) : <GreetingCard/>;
   return (
     <div className="ChatWindow" css={windowStyles} ref={chatWindowRef}>
       {suggestionsOpen ? (

@@ -5,6 +5,7 @@ import { css, jsx } from "@emotion/core";
 import ChatComposer from "./ChatComposer";
 import ChatWindow from "./ChatWindow";
 import HeaderNav from "./HeaderNav";
+import axios from "axios"
 
 export default function Chatbot(props) {
   const SENDER_USER = "user";
@@ -12,14 +13,7 @@ export default function Chatbot(props) {
 
   const [suggestionsOpen, setSuggestionsOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [conversation, setConversation] = useState([
-    { text: "Who is Nimbus?", sender: SENDER_USER, timestamp: Date.now() },
-    {
-      text: "No idea, I'm from Swanton",
-      sender: SENDER_BOT,
-      timestamp: Date.now() + 1,
-    },
-  ]);
+  const [conversation, setConversation] = useState([]);
 
   /**
    * Toggles the suggestions
@@ -36,15 +30,26 @@ export default function Chatbot(props) {
     if (query === "") return;
     let requestData = { message: query };
     // ... make the request...
-    let response = [
-      { recipient_id: "default", text: "Swanton Pacific Ranch is 3200 acres." },
-    ];
-    let botMessage = response[0].text;
-    setConversation([
-      ...conversation,
-      { text: botMessage, sender: SENDER_BOT, timestamp: Date.now() },
-    ]);
-    setQuery("");
+
+    async function postMessage() {
+      let response;
+      try {
+        response =  await axios.post("webhooks/rest/webhook", requestData)
+      } catch(err) {
+        console.error(err)
+        return;
+      }
+      debugger
+      let botMessage = response[0].text;
+      setConversation([
+        ...conversation,
+        { text: botMessage, sender: SENDER_BOT, timestamp: Date.now() },
+      ]);
+      setQuery("");
+    }
+
+    postMessage();
+    
   }, [query]);
 
   /**
@@ -64,6 +69,8 @@ export default function Chatbot(props) {
     grid-template-columns: 1fr;
     grid-template-areas: "header" "chat-window" "composer";
     width: 100%;
+    max-width: 700px;
+    margin:auto;
     height: 100%;
   `;
 
