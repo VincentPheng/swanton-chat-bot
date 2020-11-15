@@ -28,24 +28,21 @@ export default function Chatbot(props) {
    */
   useEffect(() => {
     if (query === "") return;
-    let requestData = { message: query };
-    // ... make the request...
+    let payload = { message: query };
 
     async function postMessage() {
-      let response;
       try {
-        response = await axios.post("webhooks/rest/webhook", requestData);
+        const response = await axios.post("webhooks/rest/webhook", payload);
+        const answerText = response.data[0].text;
+        setQuery("");
+        setConversation([
+          ...conversation,
+          { text: answerText, sender: SENDER_BOT, timestamp: Date.now() },
+        ]);
       } catch (err) {
         console.error(err);
         return;
       }
-      debugger;
-      let botMessage = response[0].text;
-      setConversation([
-        ...conversation,
-        { text: botMessage, sender: SENDER_BOT, timestamp: Date.now() },
-      ]);
-      setQuery("");
     }
 
     postMessage();
