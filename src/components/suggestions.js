@@ -1,8 +1,10 @@
 const suggestions = [
-  "How big is Swanton Ranch?",
-  "When was Swanton Founded?",
-  "What does Swanton Ranch produce?",
-  "How many cows live at Swanton Ranch?",
+  "How big is Swanton Pacific Ranch?",
+  "Where did Swanton get its name?",
+  "What group of Indigenous Peoples lived in the Swanton area before Spanish colonization?",
+  "What was the original name of the land grant that Swanton was part of?",
+  "How many plants have been identified in the Swanton/Scott Creek Watershed?",
+  "What is a fun fact about the Rancho?",
 ];
 
 export default suggestions;

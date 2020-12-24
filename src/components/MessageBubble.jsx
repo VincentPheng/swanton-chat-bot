@@ -3,14 +3,6 @@
 import { css, jsx } from "@emotion/core";
 
 export default function MessageBubble({ text, alignLeft }) {
-  // const bubbleWrapperStyle = css`
-  //   width: 100%;
-  //   height: auto;
-  // `;
-  // const wrapperStyle = (theme) => css`
-  //   width: 100%;
-  //   height: min-content;
-  // `;
   const messageStyle = (theme) =>
     css`
       color: ${alignLeft ? theme.color.primary : theme.color.secondary};
@@ -24,10 +16,8 @@ export default function MessageBubble({ text, alignLeft }) {
       border-radius: 37px 37px ${alignLeft ? "37px 7px" : "7px 37px"};
       border: 1px solid rgba(34, 34, 34, 0.2);
       border-color: ${alignLeft && "transparent"};
-      margin: 20px 0 ;
+      margin: 20px 0;
       align-self: ${!alignLeft && "flex-end"};
     `;
-  return (
-        <p css={messageStyle}>{text}</p>
-  );
+  return <p css={messageStyle}>{text}</p>;
 }
