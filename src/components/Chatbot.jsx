@@ -1,7 +1,6 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { useEffect, useState } from "react";
-import { css, jsx } from "@emotion/core";
+import { css } from "@emotion/react";
 import ChatComposer from "./ChatComposer";
 import ChatWindow from "./ChatWindow";
 import HeaderNav from "./HeaderNav";
@@ -73,20 +72,16 @@ export default function Chatbot(props) {
   return (
     <main className="Chatbot" css={chatbotStyles}>
       <HeaderNav
-        key="header"
         onSuggestionClick={onSuggestionClick}
         suggestionsOpen={suggestionsOpen}
       />
       <ChatWindow
-        key="chat-window"
         conversation={conversation}
         suggestionsOpen={suggestionsOpen}
         onSend={sendMessage}
         onSuggestionClick={onSuggestionClick}
       />
-      {!suggestionsOpen && (
-        <ChatComposer key="chat-composer" onSend={sendMessage} />
-      )}
+      {!suggestionsOpen && <ChatComposer onSend={sendMessage} />}
     </main>
   );
 }

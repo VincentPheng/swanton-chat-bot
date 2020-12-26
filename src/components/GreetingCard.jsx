@@ -1,6 +1,5 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 
 export default function GreetingCard() {
   const titleText = "Welcome to Swanton Chat!";
@@ -33,9 +32,7 @@ export default function GreetingCard() {
 
   return (
     <div css={cardStyles}>
-      <h2 key="cardTitle" css={titleStyle}>
-        {titleText}
-      </h2>
+      <h2 css={titleStyle}>{titleText}</h2>
       {description}
     </div>
   );
