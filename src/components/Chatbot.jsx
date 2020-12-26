@@ -33,12 +33,13 @@ export default function Chatbot(props) {
     async function postMessage() {
       try {
         const response = await axios.post("webhooks/rest/webhook", payload);
-        const answerText = response.data[0].text;
+        const answerMessages = response.data.map(({ text }, i) => ({
+          text,
+          sender: SENDER_BOT,
+          timestamp: Date.now() + i,
+        }));
         setQuery("");
-        setConversation([
-          ...conversation,
-          { text: answerText, sender: SENDER_BOT, timestamp: Date.now() },
-        ]);
+        setConversation([...conversation, ...answerMessages]);
       } catch (err) {
         console.error(err);
         return;
