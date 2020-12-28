@@ -1,10 +1,9 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { useEffect, useRef } from "react";
-import { css, jsx } from "@emotion/core";
+import { css } from "@emotion/react";
 import MessageBubble from "./MessageBubble";
 import SuggestedOptions from "./SuggestedOptions";
-import GreetingCard from "./GreetingCard"
+import GreetingCard from "./GreetingCard";
 
 export default function ChatWindow({
   conversation,
@@ -13,7 +12,7 @@ export default function ChatWindow({
   onSuggestionClick,
 }) {
   const windowStyles = css`
-    display:flex;
+    display: flex;
     flex-direction: column;
     padding: 20px;
     width: 100%;
@@ -38,13 +37,17 @@ export default function ChatWindow({
   /**
    * Create message bubbles from the current conversation
    */
-  const conversationElements = conversation.length ? conversation.map((m) => (
-    <MessageBubble
-      key={m.timestamp}
-      text={m.text}
-      alignLeft={m.sender !== "user"}
-    />
-  )) : <GreetingCard/>;
+  const conversationElements = conversation.length ? (
+    conversation.map((m) => (
+      <MessageBubble
+        key={m.timestamp}
+        text={m.text}
+        alignLeft={m.sender !== "user"}
+      />
+    ))
+  ) : (
+    <GreetingCard />
+  );
   return (
     <div className="ChatWindow" css={windowStyles} ref={chatWindowRef}>
       {suggestionsOpen ? (

@@ -1,7 +1,6 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { useEffect, useRef } from "react";
-import { css, jsx } from "@emotion/core";
+import { css } from "@emotion/react";
 import { Send } from "react-feather";
 
 export default function ChatComposer({ onSend }) {
@@ -30,7 +29,7 @@ export default function ChatComposer({ onSend }) {
     border-radius: 30px;
     max-height: 100px;
     overflow-y: scroll;
-    border: 1px solid rgba(34,34,34,0.2);
+    border: 1px solid rgba(34, 34, 34, 0.2);
   `;
 
   const sendButtonStyle = (theme) => css`
@@ -86,20 +85,13 @@ export default function ChatComposer({ onSend }) {
     <div css={menuBarStyle} className="ChatComposer">
       <div css={contentStyle}>
         <div
-          key="textField"
           css={txtFieldStyle}
           ref={textFieldRef}
           contentEditable="true"
         ></div>
-        <button
-          key="sendButton"
-          css={sendButtonStyle}
-          onClick={() => sendMessage()}
-        >
-          <Send key="send-icon" size={20} />
-          <p key="buttonText" css={buttonTextStyle}>
-            Send
-          </p>
+        <button css={sendButtonStyle} onClick={() => sendMessage()}>
+          <Send size={20} />
+          <p css={buttonTextStyle}>Send</p>
         </button>
       </div>
     </div>
