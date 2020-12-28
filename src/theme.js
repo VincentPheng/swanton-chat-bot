@@ -4,6 +4,7 @@ const theme = {
     accent: "#36863A",
     secondary: "#133F2E",
     light: "#EBEBEB",
+    error: "#d43646",
   },
   borderRadius: ["10px", "15px", "20px"],
   shadow: {

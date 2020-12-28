@@ -31,11 +31,29 @@ export default function Chatbot(props) {
 
     async function postMessage() {
       try {
-        const response = await axios.post("webhooks/rest/webhook", payload);
+        // const response = await axios.post("webhooks/rest/webhook", payload);
+        console.log("REVERT THIS BEFORE MERGE");
+        const response = {
+          data: [
+            {
+              text: "Hello World.",
+              sender: SENDER_BOT,
+              timestamp: Date.now(),
+              responseType: "answer",
+            },
+            {
+              text: "Hi there.",
+              sender: SENDER_BOT,
+              timestamp: Date.now() + 1,
+              responseType: "followUp",
+            },
+          ],
+        };
         const answerMessages = response.data.map(({ text }, i) => ({
           text,
           sender: SENDER_BOT,
           timestamp: Date.now() + i,
+          responseType: i === 0 ? "answer" : "followUp",
         }));
         setQuery("");
         setConversation([...conversation, ...answerMessages]);
@@ -58,6 +76,23 @@ export default function Chatbot(props) {
     ]);
     setQuery(message);
   };
+  /**
+   * Handles user feedback about chatbot answer accuracy.
+   */
+  function onFeedbackGiven(id, isPositive) {
+    // We're gonna need a real endpoint, but for testing purposes:
+    let answerIndex = conversation.findIndex(
+      (message) => message.timestamp === id
+    );
+    if (answerIndex === -1) return;
+    const payload = {
+      isPositive,
+      question: conversation[answerIndex - 1],
+      answer: conversation[answerIndex],
+    };
+
+    console.log(payload);
+  }
 
   const chatbotStyles = css`
     display: grid;
@@ -81,6 +116,7 @@ export default function Chatbot(props) {
         suggestionsOpen={suggestionsOpen}
         onSend={sendMessage}
         onSuggestionClick={onSuggestionClick}
+        onFeedbackGiven={onFeedbackGiven}
       />
       {!suggestionsOpen && <ChatComposer onSend={sendMessage} />}
     </main>

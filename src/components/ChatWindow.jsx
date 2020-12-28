@@ -10,6 +10,7 @@ export default function ChatWindow({
   suggestionsOpen,
   onSend,
   onSuggestionClick,
+  onFeedbackGiven,
 }) {
   const windowStyles = css`
     display: flex;
@@ -42,7 +43,10 @@ export default function ChatWindow({
       <MessageBubble
         key={m.timestamp}
         text={m.text}
+        timestamp={m.timestamp}
+        showFeedback={m.responseType === "answer"}
         alignLeft={m.sender !== "user"}
+        onFeedbackGiven={onFeedbackGiven}
       />
     ))
   ) : (
