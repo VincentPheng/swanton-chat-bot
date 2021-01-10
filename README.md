@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Local Development
+1. `git clone https://github.com/calpoly-csai/swanton-chat-bot.git`
+2. `cd swanton-chat-bot`
+3. `npm install`
+4. Run a development server with `yarn start` to see your changes live. Check it out at http://localhost:3000 (or wherever your shell tells you to go).
+
 ## Available Scripts
 
 In the project directory, you can run:
