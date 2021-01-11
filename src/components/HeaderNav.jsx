@@ -79,7 +79,7 @@ export default function HeaderNav({ onSuggestionClick, suggestionsOpen }) {
           }
         `}
       >
-        {suggestionsOpen ? "Suggestions" : "Chat"}
+        {suggestionsOpen ? "FAQs" : "Chat"}
       </h2>
 
       {suggestionsToggle}
