@@ -45,13 +45,6 @@ export default function HeaderNav({ onSuggestionClick, suggestionsOpen }) {
 
   return (
     <header css={headerStyles}>
-      <h1
-        css={(theme) => css`
-          grid-area: "nav-left";
-          ${titleStyles(theme)};
-        `}
-      >
-      </h1>
 
       <h2
         css={(theme) => css`
