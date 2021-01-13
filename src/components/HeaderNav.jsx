@@ -6,7 +6,7 @@ import useEscape from "../hooks/useEscape";
 export default function HeaderNav({ onSuggestionClick, suggestionsOpen }) {
   const headerStyles = (theme) => css`
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1fr, 2fr, 1fr);
     grid-template-rows: auto;
     grid-template-areas: "left-nav center-nav right-nav";
     align-items: center;
@@ -45,14 +45,6 @@ export default function HeaderNav({ onSuggestionClick, suggestionsOpen }) {
 
   return (
     <header css={headerStyles}>
-      <h1
-        css={(theme) => css`
-          grid-area: "nav-left";
-          ${titleStyles(theme)};
-        `}
-      >
-        Swanton
-      </h1>
 
       <h2
         css={(theme) => css`
@@ -79,7 +71,7 @@ export default function HeaderNav({ onSuggestionClick, suggestionsOpen }) {
           }
         `}
       >
-        {suggestionsOpen ? "FAQs" : "Chat"}
+        {suggestionsOpen ? "FAQs" : "Swanton Pacific Ranch Chat" }
       </h2>
 
       {suggestionsToggle}
