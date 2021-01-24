@@ -3,6 +3,8 @@ import { css } from "@emotion/react";
 import suggestions from "./suggestions";
 
 export default function SuggestedOptions({ onSend, onSuggestionClick }) {
+  const contactText = "Please send feedback and comments to spranch@calpoly.edu";
+
   const suggestionBubbleStyle = (theme) =>
     css`
       display: block;
@@ -34,22 +36,32 @@ export default function SuggestedOptions({ onSend, onSuggestionClick }) {
     overflow-y: scroll;
   `;
 
+  const contactTextStyle = css`
+    font-size: 16px;
+    color: red;
+    text-align: center;
+  `;
+
   function sendMessage(suggestion) {
     onSuggestionClick();
     onSend(suggestion);
   }
 
   return (
-    <ul css={suggestionListStyle}>
-      {suggestions.map((suggestion) => (
-        <li
-          css={suggestionBubbleStyle}
-          key={suggestion}
-          onClick={() => sendMessage(suggestion)}
-        >
-          {suggestion}
-        </li>
-      ))}
-    </ul>
+    <div>
+      <ul css={suggestionListStyle}>
+        {suggestions.map((suggestion) => (
+          <li
+            css={suggestionBubbleStyle}
+            key={suggestion}
+            onClick={() => sendMessage(suggestion)}
+          >
+            {suggestion}
+          </li>
+        ))}
+      </ul>
+
+      <p css={contactTextStyle}>{contactText}</p>
+    </div>
   );
 }
