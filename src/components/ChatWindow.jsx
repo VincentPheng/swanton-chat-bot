@@ -26,7 +26,7 @@ export default function ChatWindow({
 
   // Scroll to the bottom of the chat window every time a new message is sent
   useEffect(() => {
-    if (!chatWindowRef.current) return;
+    if (!chatWindowRef.current || suggestionsOpen) return;
     chatWindowRef.current.scrollTo({
       top: chatWindowRef.current.scrollHeight,
       left: 0,
