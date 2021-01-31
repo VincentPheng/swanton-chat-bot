@@ -4,7 +4,7 @@ import suggestions from "./suggestions";
 
 export default function SuggestedOptions({ onSend, onSuggestionClick }) {
   const contactText =
-    "Please send feedback and comments to spranch@calpoly.edu";
+    "Please send feedback and comments to swantonpoppy@gmail.com";
 
   const suggestionBubbleStyle = (theme) =>
     css`
