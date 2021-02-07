@@ -36,6 +36,7 @@ export default function Chatbot(props) {
           text,
           sender: SENDER_BOT,
           timestamp: Date.now() + i,
+          responseType: i === 0 ? "answer" : "followUp",
         }));
         setQuery("");
         setConversation([...conversation, ...answerMessages]);
@@ -58,6 +59,22 @@ export default function Chatbot(props) {
     ]);
     setQuery(message);
   };
+  /**
+   * Handles user feedback about chatbot answer accuracy.
+   */
+  function onFeedbackGiven(id, isPositive) {
+    // We're gonna need a real endpoint, but for testing purposes:
+    let answerIndex = conversation.findIndex(
+      (message) => message.timestamp === id
+    );
+    if (answerIndex === -1) return;
+    const payload = {
+      sentiment: isPositive ? "positive" : "negative",
+      question: conversation[answerIndex - 1].text,
+      answer: conversation[answerIndex].text,
+    };
+    axios.post("log/query", payload);
+  }
 
   const chatbotStyles = css`
     display: grid;
@@ -81,6 +98,7 @@ export default function Chatbot(props) {
         suggestionsOpen={suggestionsOpen}
         onSend={sendMessage}
         onSuggestionClick={onSuggestionClick}
+        onFeedbackGiven={onFeedbackGiven}
       />
       {!suggestionsOpen && <ChatComposer onSend={sendMessage} />}
     </main>
