@@ -31,24 +31,7 @@ export default function Chatbot(props) {
 
     async function postMessage() {
       try {
-        // const response = await axios.post("webhooks/rest/webhook", payload);
-        console.log("REVERT THIS BEFORE MERGE");
-        const response = {
-          data: [
-            {
-              text: "Hello World.",
-              sender: SENDER_BOT,
-              timestamp: Date.now(),
-              responseType: "answer",
-            },
-            {
-              text: "Hi there.",
-              sender: SENDER_BOT,
-              timestamp: Date.now() + 1,
-              responseType: "followUp",
-            },
-          ],
-        };
+        const response = await axios.post("webhooks/rest/webhook", payload);
         const answerMessages = response.data.map(({ text }, i) => ({
           text,
           sender: SENDER_BOT,
@@ -86,12 +69,11 @@ export default function Chatbot(props) {
     );
     if (answerIndex === -1) return;
     const payload = {
-      isPositive,
-      question: conversation[answerIndex - 1],
-      answer: conversation[answerIndex],
+      sentiment: isPositive ? "positive" : "negative",
+      question: conversation[answerIndex - 1].text,
+      answer: conversation[answerIndex].text,
     };
-
-    console.log(payload);
+    axios.post("log/query", payload);
   }
 
   const chatbotStyles = css`
