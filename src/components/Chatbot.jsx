@@ -31,7 +31,7 @@ export default function Chatbot(props) {
 
     async function postMessage() {
       try {
-        const response = await axios.post("webhooks/rest/webhook", payload);
+        const response = await axios.post("api/webhooks/rest/webhook", payload);
         const answerMessages = response.data.map(({ text }, i) => ({
           text,
           sender: SENDER_BOT,
