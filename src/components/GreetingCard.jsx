@@ -1,15 +1,32 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useSpring, animated } from '@react-spring/web';
 
 export default function GreetingCard() {
   const titleText = "Welcome to Swanton Poppy Chat!";
-  const descriptionText = `Ask anything you want to know about the ranch! 
+  const descriptionText = `Ask anything you want to know about the ranch!
   Check out some commonly asked questions by clicking the question mark above.`;
   const logoSrc = `/logo512.png`;
   const logoAltText = `Swanton Poppy Logo`;
 
+  const animCardStyle = useSpring({
+    from: { opacity: 0, width: '50%', transform: 'translate3d(0, 300px, 0)' },
+    to: { opacity: 1, width: '70%', transform: 'translate3d(0, 0px, 0)' },
+
+  });
+
+  const animTitleStyle = useSpring({
+    from: { opacity: 0, fontSize: '10px' },
+    to: { opacity: 1, fontSize: '20px' },
+  });
+
+  const animDescStyle = useSpring({
+    from: { opacity: 0, fontSize: '5px' },
+    to: { opacity: 1, fontSize: '16px' },
+  });
+
+
   const cardStyles = css`
-    width: 70%;
     align-self: center;
     margin-top: 50px;
     padding: 50px;
@@ -27,25 +44,25 @@ export default function GreetingCard() {
   `;
 
   const titleStyle = css`
-    font-size: 20px;
     text-align: center;
   `;
 
   const descriptionStyle = css`
     font-size: 16px;
+    text-align: center;
   `;
 
   const description = descriptionText.split("\n").map((text, i) => (
-    <p key={i} css={descriptionStyle}>
+    <animated.p key={i} style={animDescStyle} css={descriptionStyle}>
       {text}
-    </p>
+    </animated.p>
   ));
 
   return (
-    <div css={cardStyles}>
+    <animated.div style={animCardStyle} css={cardStyles}>
       <img css={logoStyle} src={logoSrc} alt={logoAltText}/>
-      <h2 css={titleStyle}>{titleText}</h2>
+      <animated.h2 style={animTitleStyle} css={titleStyle}>{titleText}</animated.h2>
       {description}
-    </div>
+    </animated.div>
   );
 }
