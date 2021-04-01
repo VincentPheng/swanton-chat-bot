@@ -1,8 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useSpring, useTrail, animated } from '@react-spring/web';
 import suggestions from "./suggestions";
 
 export default function SuggestedOptions({ onSend, onSuggestionClick }) {
+  const trail = useTrail(suggestions.length, {
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+  });
+
+  const animContactStyle = useSpring({
+    from: { opacity: 0},
+    to: { opacity: 1},
+  });
+
   const contactText =
     "Please send feedback and comments to swantonpoppycp@gmail.com";
 
@@ -58,18 +69,17 @@ export default function SuggestedOptions({ onSend, onSuggestionClick }) {
   return (
     <div css={suggestedOptionsStyle}>
       <ul css={suggestionListStyle}>
-        {suggestions.map((suggestion) => (
-          <li
+        {trail.map(({ opacity }, index) => (
+          <animated.li
+            style={{ opacity }}
             css={suggestionBubbleStyle}
-            key={suggestion}
-            onClick={() => sendMessage(suggestion)}
-          >
-            {suggestion}
-          </li>
-        ))}
+            key={suggestions[index]}
+            onClick={() => sendMessage(suggestions[index])}
+          >{suggestions[index]}
+          </animated.li>))}
       </ul>
 
-      <p css={contactTextStyle}>{contactText}</p>
+      <animated.p style={animContactStyle} css={contactTextStyle}>{contactText}</animated.p>
     </div>
   );
 }

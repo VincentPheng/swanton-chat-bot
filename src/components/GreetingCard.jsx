@@ -12,7 +12,6 @@ export default function GreetingCard() {
   const animCardStyle = useSpring({
     from: { opacity: 0, width: '50%', transform: 'translate3d(0, 300px, 0)' },
     to: { opacity: 1, width: '70%', transform: 'translate3d(0, 0px, 0)' },
-
   });
 
   const animTitleStyle = useSpring({
@@ -21,7 +20,7 @@ export default function GreetingCard() {
   });
 
   const animDescStyle = useSpring({
-    from: { opacity: 0, fontSize: '5px' },
+    from: { opacity: 0, fontSize: '8px' },
     to: { opacity: 1, fontSize: '16px' },
   });
 

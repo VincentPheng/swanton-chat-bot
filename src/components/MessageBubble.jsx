@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { ThumbsUp, ThumbsDown } from "react-feather";
+import { useSpring, animated } from '@react-spring/web';
 
 export default function MessageBubble({
   text,
@@ -9,6 +10,16 @@ export default function MessageBubble({
   onFeedbackGiven,
   timestamp,
 }) {
+  const animWrapperStyle = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+  });
+
+  const animTextStyle = useSpring({
+    from: { opacity: 0, fontSize: '5px' },
+    to: { opacity: 1, fontSize: '20px' },
+  });
+
   const messageCss = (theme) =>
     css`
       display: inline-block;
@@ -23,6 +34,7 @@ export default function MessageBubble({
       border-color: ${alignLeft && "transparent"};
       margin-right: ${showFeedback ? "20px" : 0};
     `;
+    
   const messageWrapperCss = css`
     width: max-content;
     max-width: 70%;
@@ -54,8 +66,8 @@ export default function MessageBubble({
   `;
 
   return (
-    <div css={messageWrapperCss}>
-      <p css={messageCss}>{text}</p>
+    <animated.div style={animWrapperStyle} css={messageWrapperCss}>
+      <animated.p style={animTextStyle} css={messageCss}>{text}</animated.p>
       {showFeedback && (
         <>
           <ThumbsDown
@@ -68,6 +80,6 @@ export default function MessageBubble({
           />
         </>
       )}
-    </div>
+    </animated.div>
   );
 }
